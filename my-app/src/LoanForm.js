@@ -1,7 +1,7 @@
 import "./FormStyle.css"
 import Modal from "./modal";
 import {useState } from "react";
-export default function LoanForm(title){
+export default function LoanForm({title}){
     const[errorMessage, setErrorMessage] = useState(null);
     const[modalIsVisible, setModalIsVisible] = useState(false);
     const[loanInputs, setLoanImputs] = useState({
