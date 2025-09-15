@@ -2,6 +2,7 @@ import "./FormStyle.css"
 import Modal from "./modal";
 import {useState } from "react";
 import MyComponent from "./MyComponent";
+import  LoanFormInputContext from "./contexts/LoanFormInputContext";
 export default function LoanForm({title}){
     const[errorMessage, setErrorMessage] = useState(null);
     const[modalIsVisible, setModalIsVisible] = useState(false);
@@ -32,6 +33,9 @@ export default function LoanForm({title}){
     function handlePhoneNumberInputCahnge(value){
         setLoanImputs({...loanInputs, phoneNumber:value})
     }
+    function handleNameInputChange(value){
+        setLoanImputs({...loanInputs, name:value})
+    }
     
     return(
         
@@ -41,12 +45,18 @@ export default function LoanForm({title}){
             <form id="loan-form"className="flex " style={{ flexDirection:"column"}}>
                 <h1>Requesting a Loan</h1>
                 <hr />
-                <label>Name:
+                <LoanFormInputContext.Provider value={{inputValue:loanInputs.name, handleChange:handleNameInputChange, labelTitle:"Name :"}}>
+                    <MyComponent />
+                </LoanFormInputContext.Provider>
+                {/* <label>Name:
                     <input onChange={(event) =>{
                         setLoanImputs({...loanInputs, name:event.target.value})
                     }} value={loanInputs.name}/>
-                </label>
-                <MyComponent value={loanInputs.phoneNumber} handleChange={handlePhoneNumberInputCahnge} inputName="Phone Number :"/>
+                </label> */}
+                <LoanFormInputContext.Provider  value={{inputValue:loanInputs.phoneNumber, handleChange:handlePhoneNumberInputCahnge, labelTitle:"Phone Number :"}}>
+                    <MyComponent />
+                </LoanFormInputContext.Provider>
+                
                 {/* <label>Phone Number:
                     <input onChange={(event) => {
                         setLoanImputs({...loanInputs, phoneNumber:event.target.value})

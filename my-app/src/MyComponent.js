@@ -1,12 +1,12 @@
-export default function MyComponent({value, handleChange, inputName}){
+import MyInput from "./MyInput";
+export default function MyComponent(){
     return (
+        <>
+        <h1>This is the header</h1>
         <div>
-            <div>communicating using props</div>
-            <label>{inputName}
-                    <input onChange={(event) => {
-                        handleChange(event.target.value)
-                    }} value={value} />
-                </label>
+            <MyInput/>
         </div>
+        <h1>This is the footer</h1>
+        </>
     )
 }
